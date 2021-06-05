@@ -1,3 +1,4 @@
+from dirmaker import make_dir_tree
 from preprocess import get_tree
 import sys
 from pprint import pprint
@@ -8,6 +9,6 @@ def main():
 
 
 if __name__ == "__main__":
-    arg = sys.argv[1]
-    print(arg)
-    pprint(get_tree(arg))
+    parent_path, arg = sys.argv[1:3]
+    print(parent_path, arg)
+    make_dir_tree(parent_path, get_tree(arg))
