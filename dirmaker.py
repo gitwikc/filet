@@ -2,11 +2,19 @@ import os
 
 
 def make_file(parent_path: str, filename: str) -> None:
+    """
+    Creates a file in the given parent path
+    with the given filename
+    """
     with open(f"{parent_path}/{filename}", 'w') as f:
         f.close()
 
 
 def make_dir_tree(parent_path: str, tree: list) -> None:
+    """
+    Creates Creates a directory tree in the given parent path
+    with the given tree
+    """
     for i in tree:
         if type(i) == str:
             make_file(parent_path, i)
