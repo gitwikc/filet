@@ -1,4 +1,21 @@
 from typing import List
+import argparse
+
+
+def get_args():
+    ap = argparse.ArgumentParser()
+
+    ap.add_argument('--root', '-r', type=str,
+                    nargs='?', default='.',
+                    required=False,
+                    help='Root directory to create the filetree')
+    ap.add_argument('struc', type=str,
+                    help='The structure of the filetree in filet synax')
+    ap.add_argument('--notree',
+                    action='store_true',
+                    help='File tree will not be logged to console')
+    args = ap.parse_args()
+    return args
 
 
 def get_tree(arg: str) -> List[object]:
