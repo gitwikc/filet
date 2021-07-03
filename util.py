@@ -1,4 +1,5 @@
-from typing import List
+from typing import Dict, List
+from json import load
 
 
 def get_tree(arg: str) -> List[object]:
@@ -86,3 +87,8 @@ def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: 
     elif type(tree) is str:   # File
         depth_space()
         print(f"{prefix_file} {tree}")
+
+
+def get_realease_info() -> Dict:
+    with open('release.json', 'r') as f:
+        return load(f)
