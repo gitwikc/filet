@@ -1,13 +1,16 @@
 from dirmaker import make_dir_tree
 from preprocess import get_args
-from util import get_realease_info, get_tree, print_tree
+from util import get_tree, print_tree
 
 
 if __name__ == "__main__":
+    release_info = {
+        "version": "v1.5",
+        "date": "2021-07-04"
+    }
     args = get_args()
 
     if args.version:
-        release_info = get_realease_info()
         print(
             f"> Filet version\t\t{release_info['version']}\n> Release date\t\t{release_info['date']}\n{'-' * 40}")
 
