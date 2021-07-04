@@ -74,7 +74,7 @@ To update the version of `filet` on your computer:
 
 1. Download the desired (preferably _latest_) version of `filet.exe` from the [releases](https://github.com/gitwikc/filet/releases) page.
 2. Save it in the directory where you have previously installed `filet`
-3. :party_popper: YAY! You have successfully updated `filet` on your computer
+3. 🎆 YAY! You have successfully updated `filet` on your computer
 
 ## Contributing
 
