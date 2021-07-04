@@ -9,7 +9,7 @@ if __name__ == "__main__":
     if args.version:
         release_info = get_realease_info()
         print(
-            f"> Filet version\t\t{release_info['version']}\n> Release date\t\t{release_info['date']}\n{'-' * 40}")
+            f"> Filet version\t\tv{release_info['version']}\n> Release date\t\t{release_info['date']}\n{'-' * 40}")
 
     try:
         tree = get_tree(args.struc)
