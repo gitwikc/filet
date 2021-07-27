@@ -46,5 +46,5 @@ def create_gitignore(parent_path: str, ignored: List[str]) -> None:
     if ignored:
         with open(os.path.join(parent_path, '.gitignore'), 'w') as f:
             f.writelines(
-                [line + '\n' for line in ignored if type(line) is str])
+                [f'{line[len(parent_path) + 1:]}\n'.replace('\\', '/') for line in ignored if type(line) is str])
             f.close()
