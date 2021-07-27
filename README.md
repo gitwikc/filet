@@ -68,6 +68,23 @@ $ filet dir1[f1.txt+f2.txt+dir2[f3.txt]]
   `$ filet --root ../tests myfolder[images[]+important[bday.txt+todos.txt]]+software[README.txt]`<br />
   Creates the file tree in the `tests` folder in **parent directory** of current directory (in which the terminal runs `filet` command)
 
+## Ignoring files (adding them to `.gitignore`)
+
+Prefix the file or folder name in the filet structure argument to add it to a `.gitignore` file in the filet `root`location
+
+### Example 🥊
+
+`$ filet -r D://Projects/pie_py src[main.py+pie.py+*ingredients.json+*tests[make_pie.py]]`
+
+This would create the file tree as usual, but with an _additional file_ at `D://Projects/pie_py/.gitignore`, which contains -
+
+```
+src/ingredients.json
+src/tests
+```
+
+> When you initialize a git repository in `D://Projects/pie_py`, you will notice `src/ingredients.json` and `src/tests` are ignored by default by git
+
 ## Updating
 
 To update the version of `filet` on your computer:
@@ -82,4 +99,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-[ISC](https://choosealicense.com/licenses/isc/)
+[MIT](https://choosealicense.com/licenses/mit)

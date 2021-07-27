@@ -72,7 +72,7 @@ def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: 
         Indents the output to the depth in the file tree
         """
         for i in range(depth):
-            print('    ', end='')
+            print(' ' * 4, end='')
 
     if type(tree) is dict:   # Folder
         for key in tree.keys():
