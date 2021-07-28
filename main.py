@@ -5,8 +5,8 @@ from util import get_tree, print_tree
 
 if __name__ == "__main__":
     release_info = {
-        "version": "v1.5",
-        "date": "2021-07-04"
+        "version": "v1.6",
+        "date": "2021-07-28"
     }
     args = get_args()
 
