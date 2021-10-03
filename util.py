@@ -1,4 +1,15 @@
-from typing import Dict, List
+from typing import List
+from colorama import init as colorama_init, Fore
+from enum import Enum
+
+# Initialize colorama
+colorama_init()
+
+
+class TextColor(Enum):
+    FILE = Fore.LIGHTGREEN_EX
+    FOLDER = Fore.LIGHTMAGENTA_EX
+    IGNORED = Fore.WHITE
 
 
 def get_tree(arg: str) -> List[object]:
@@ -56,7 +67,7 @@ def get_tree(arg: str) -> List[object]:
     return tree
 
 
-def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: str = chr(28)) -> None:
+def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: str = chr(28), ignored: bool = False) -> None:
     """
     Prints the given file tree at the given depth. Depth is the number of levels into the file tree
     at which the control is, currently; this is a recurring function and it is advised not to specify
@@ -66,6 +77,7 @@ def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: 
     :param depth: The depth of the tree in the file tree (used for indentation)
     :param prefix_folder: The prefix applied to folders in the file tree
     :param prefix_file: The prefix applied to files in the file tree
+    :param ignored: Is this tree ignored in `.gitignore`?
     """
     def depth_space():
         """
@@ -77,12 +89,23 @@ def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: 
     if type(tree) is dict:   # Folder
         for key in tree.keys():
             depth_space()   # Indent
-            print(f"{prefix_folder} {key}")   # Write folder name
+
+            # Is the folder ignored? Y -> Propagate to children
+            ignored |= key.startswith('*')
+
+            # Get text color
+            file_text_color = TextColor.IGNORED.value if ignored else TextColor.FOLDER.value
+            # Write folder name
+            # Removes leading '*'s, if any
+            print(f"{prefix_folder} {file_text_color}{key.lstrip('*')}{Fore.RESET}")
             sub_tree = tree.get(key)   # Get folder contents
-            print_tree(sub_tree, depth=depth+1)  # Print folder contents tree
+            # Print folder contents tree
+            print_tree(tree=sub_tree, depth=depth+1, ignored=ignored)
     elif type(tree) is list:   # List of files (contents of folder)
         for sub_tree in tree:
-            print_tree(sub_tree, depth=depth)
-    elif type(tree) is str:   # File
+            print_tree(tree=sub_tree, depth=depth, ignored=ignored)
+    elif type(tree) is str:   # File (tree itself is file name)
         depth_space()
-        print(f"{prefix_file} {tree}")
+        # Get text color
+        file_text_color = TextColor.IGNORED.value if ignored else TextColor.FILE.value
+        print(f"{prefix_file} {file_text_color}{tree.lstrip('*')}{Fore.RESET}")
