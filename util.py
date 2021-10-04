@@ -106,6 +106,10 @@ def print_tree(tree, depth: int = 0, prefix_folder: str = chr(31), prefix_file: 
             print_tree(tree=sub_tree, depth=depth, ignored=ignored)
     elif type(tree) is str:   # File (tree itself is file name)
         depth_space()
+
+        # Check if file ignored
+        ignored |= tree.startswith('*')
+
         # Get text color
         file_text_color = TextColor.IGNORED.value if ignored else TextColor.FILE.value
         print(f"{prefix_file} {file_text_color}{tree.lstrip('*')}{Fore.RESET}")
