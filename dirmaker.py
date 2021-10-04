@@ -13,7 +13,7 @@ def make_file(parent_path: str, filename: str) -> None:
 
 def make_dir_tree(parent_path: str, tree: List[object], ignored: List[str] = []) -> List[str]:
     """
-    Creates Creates a directory tree in the given parent path
+    Creates a directory tree in the given parent path
     with the given tree and returns the list of files to be ignored
     by git (to be written to a gitignore)
     """
@@ -44,10 +44,8 @@ def create_gitignore(parent_path: str, ignored: List[str]) -> None:
     """
     ignored = [line for line in ignored if type(line) is str]
 
-    print(ignored)
-
     if ignored:
         with open(os.path.join(parent_path, '.gitignore'), 'w') as f:
             f.writelines(
-                [f'{line[len(parent_path):]}\n'.replace('\\', '/') for line in ignored if type(line) is str])
+                [f'{line[len(parent_path):]}\n'.replace('\\', '/').lstrip('/') for line in ignored if type(line) is str])
             f.close()
