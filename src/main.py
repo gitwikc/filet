@@ -1,6 +1,7 @@
 from util.dirmaker import create_gitignore, make_dir_tree
 from util.preprocess import get_args
 from util.tree import get_tree, print_tree
+from version import get_release_info
 
 from colorama import init as colorama_init, Fore
 
@@ -9,10 +10,7 @@ colorama_init()
 
 
 if __name__ == "__main__":
-    release_info = {
-        "version": "v1.7-beta",
-        "date": "2021-10-03"
-    }
+    release_info = get_release_info()
     args = get_args()
 
     if args.version:
