@@ -1,5 +1,11 @@
 from requests import get
-from version import get_release_info
+import subprocess
+import os
+from util.version import get_release_info
+from halo import Halo
+from colorama import init as colorama_init, Fore
+
+colorama_init(autoreset=True)
 
 
 def get_releases_list():
@@ -24,6 +30,44 @@ def get_available_update():
         return latest_release
     else:
         return None
+
+
+def download_filet(download_url: str, dest: str):
+    spinner = Halo(text='Downloading update', spinner='dots')
+    spinner.start()
+    req = get(download_url)
+    spinner.stop()
+    print(f'{Fore.LIGHTGREEN_EX}\u2714 {Fore.RESET}Download complete')
+    print('Writing to file...')
+    with open(dest, 'wb') as f:
+        f.write(req.content)
+        print(f'{Fore.LIGHTGREEN_EX}Done')
+        f.close()
+    spinner.stop()
+    print(f'{Fore.LIGHTBLUE_EX}Starting installer...')
+    return subprocess.call([dest])
+
+
+def check_for_updates(verbose: bool = False):
+    if verbose:
+        spinner = Halo(text='Checking for updates...', spinner='dots')
+        spinner.start()
+    latest_update = get_available_update()
+    if verbose:
+        spinner.stop()
+
+    if latest_update and not latest_update['prerelease']:
+        print(
+            f"An update to version {Fore.LIGHTYELLOW_EX}{latest_update['name']}{Fore.RESET} is available. Do you want to install it? (y/n)")
+        print(f"{Fore.LIGHTCYAN_EX}>> {Fore.RESET}", end='')
+        if input().lower() == 'y':
+            installer_filename = f'filet_{latest_update["name"]}.exe'
+            download_filet(
+                download_url=latest_update['download_url'],
+                dest=installer_filename)
+            os.remove(installer_filename)
+    elif verbose:
+        print('> Filet is up-to-date. No updates available <')
 
 
 if __name__ == '__main__':

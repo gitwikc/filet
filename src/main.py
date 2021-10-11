@@ -1,7 +1,8 @@
 from util.dirmaker import create_gitignore, make_dir_tree
 from util.preprocess import get_args
 from util.tree import get_tree, print_tree
-from version import get_release_info
+from util.update import check_for_updates
+from util.version import get_release_info
 
 from colorama import init as colorama_init, Fore
 
@@ -34,3 +35,5 @@ if __name__ == "__main__":
             f'{Fore.LIGHTGREEN_EX}\u2714 {Fore.LIGHTWHITE_EX}Successfully created file tree{Fore.RESET}\n')
         if not args.notree:
             print_tree(tree)
+        print()
+        check_for_updates(verbose=args.update)
