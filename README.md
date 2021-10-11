@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./img/filet.png">
+    <img src="./src/img/filet.png">
 </p>
 
 # Filet
