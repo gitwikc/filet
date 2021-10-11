@@ -20,13 +20,14 @@ Use the `--help` flag for instructions
 
 ```
 $ filet --help
-usage: filet.exe [-h] [--version] [--root [ROOT]] [--notree] struc
+usage: main.py [-h] [--version] [--update] [--root [ROOT]] [--notree] struc
 
 optional arguments:
   -h, --help            show this help message and exit
 
 INFO:
   --version, -v         Prints out current version and release date of Filet
+  --update, -u          Makes the update checker verbose
 
 CREATE:
   --root [ROOT], -r [ROOT]
@@ -87,11 +88,16 @@ src/tests
 
 ## Updating
 
-To update the version of `filet` on your computer:
+### Manually
 
 1. Download the desired (preferably _latest_) version of `filet.exe` from the [releases](https://github.com/gitwikc/filet/releases) page.
 2. Save it in the directory where you have previously installed `filet`
 3. 🎆 YAY! You have successfully updated `filet` on your computer
+
+### From CLI
+
+- Filet automatically checks for updates each time it is run and will notify you about any new updates it finds.
+- To make the update checking process verbose, use the `--update` or `-u` flag
 
 ## Contributing
 

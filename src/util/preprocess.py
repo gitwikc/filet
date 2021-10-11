@@ -11,6 +11,9 @@ def get_args() -> argparse.Namespace:
     info_group.add_argument('--version', '-v',
                             action='store_true',
                             help='Prints out current version and release date of Filet')
+    info_group.add_argument('--update', '-u',
+                            action='store_true',
+                            help='Makes the update checker verbose')
 
     create_group = ap.add_argument_group('CREATE')
     # Root directory
