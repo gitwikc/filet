@@ -23,13 +23,20 @@ def get_releases_list():
     return releases
 
 
-def get_available_update():
-    latest_release = get_releases_list()[0]
+def get_available_update(verbose: bool = False):
+    try:
+        latest_release = get_releases_list()[0]
+    except Exception as ex:
+        if verbose:
+            print('Something went wrong while checking for updates.')
+            print(f'{Fore.YELLOW}Are you connected to the internet?')
+        return False
+
     current_release = get_release_info()
     if latest_release['name'] != current_release['version']:
         return latest_release
     else:
-        return None
+        return False
 
 
 def download_filet(download_url: str, dest: str):
@@ -52,7 +59,7 @@ def check_for_updates(verbose: bool = False):
     if verbose:
         spinner = Halo(text='Checking for updates...', spinner='dots')
         spinner.start()
-    latest_update = get_available_update()
+    latest_update = get_available_update(verbose)
     if verbose:
         spinner.stop()
 
