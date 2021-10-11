@@ -1,6 +1,6 @@
-from dirmaker import create_gitignore, make_dir_tree
-from preprocess import get_args
-from util import get_tree, print_tree
+from util.dirmaker import create_gitignore, make_dir_tree
+from util.preprocess import get_args
+from util.tree import get_tree, print_tree
 
 from colorama import init as colorama_init, Fore
 
@@ -10,7 +10,7 @@ colorama_init()
 
 if __name__ == "__main__":
     release_info = {
-        "version": "v1.7",
+        "version": "v1.7-beta",
         "date": "2021-10-03"
     }
     args = get_args()
