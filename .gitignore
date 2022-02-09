@@ -1,5 +1,6 @@
 venv/
-src/tests
+.venv/
+src/tests/
 __pycache__/
 .vscode/
 build/

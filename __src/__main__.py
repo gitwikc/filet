@@ -1,8 +1,8 @@
-from util.dirmaker import create_gitignore, make_dir_tree
-from util.preprocess import get_args
-from util.tree import get_tree, print_tree
-from util.update import check_for_updates
-from util.version import get_release_info
+from commands.touch.dirmaker import create_gitignore, make_dir_tree
+from src.util.preprocess import get_args
+from src.util.tree import get_tree, print_tree
+from commands.update.updater import check_for_updates
+from src.util.version import get_release_info
 
 from colorama import init as colorama_init, Fore
 

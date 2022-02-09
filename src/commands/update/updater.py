@@ -1,7 +1,7 @@
 from requests import get
 import subprocess
 import os
-from util.version import get_release_info
+from src.util.version import get_release_info
 from halo import Halo
 from colorama import init as colorama_init, Fore
 

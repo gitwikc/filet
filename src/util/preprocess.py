@@ -5,7 +5,7 @@ def get_args() -> argparse.Namespace:
     """
     Gets the command line arguments
     """
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(prog='filet')
 
     info_group = ap.add_argument_group('INFO')
     info_group.add_argument('--version', '-v',
