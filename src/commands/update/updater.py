@@ -1,7 +1,7 @@
 from requests import get
 import subprocess
 import os
-from util.version import get_release_info
+from src.util.version import get_release_info
 from halo import Halo
 from colorama import init as colorama_init, Fore
 
@@ -30,13 +30,12 @@ def get_available_update(verbose: bool = False):
         if verbose:
             print('Something went wrong while checking for updates.')
             print(f'{Fore.YELLOW}Are you connected to the internet?')
-        return False
+        return
 
     current_release = get_release_info()
-    if latest_release['name'] != current_release['version']:
+    if latest_release['name'] != current_release['version'] \
+        and latest_release['published_at'] > current_release['date']:
         return latest_release
-    else:
-        return False
 
 
 def download_filet(download_url: str, dest: str):
@@ -66,7 +65,7 @@ def check_for_updates(verbose: bool = False):
     if latest_update and not latest_update['prerelease']:
         print(
             f"An update to version {Fore.LIGHTYELLOW_EX}{latest_update['name']}{Fore.RESET} is available. Do you want to install it? (y/n)")
-        print(f"{Fore.LIGHTCYAN_EX}>> {Fore.RESET}", end='')
+        print(f"{Fore.LIGHTCYAN_EX}>>>{Fore.RESET}", end=' ')
         if input().lower() == 'y':
             installer_filename = f'filet_{latest_update["name"]}.exe'
             download_filet(
