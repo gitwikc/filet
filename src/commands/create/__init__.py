@@ -1,14 +1,14 @@
 from argparse import _SubParsersAction
 from typing import Dict
 from src.commands import Subcommand
-from src.commands.touch.dirmaker import create_gitignore, make_dir_tree
+from src.commands.create.dirmaker import create_gitignore, make_dir_tree
 from src.util.tree import get_tree, print_tree
 from colorama import Fore
 
 
 class CommandTouch(Subcommand):
     def __init__(self, subparsers: _SubParsersAction) -> None:
-        super().__init__('touch', subparsers, 'Create file/folder trees')
+        super().__init__('create', subparsers, 'Create file/folder trees')
 
     def _add_arguments(self):
         # Root directory
